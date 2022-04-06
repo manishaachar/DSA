@@ -47,6 +47,92 @@ first=new;
 }
 }
 
+void deleteBegin()
+{
+lstptr temp;
+if(first==NULL)
+{
+printf("\n List is empty");
+return;
+}
+temp=first;
+if(temp->link==NULL)
+first=NULL;
+else
+{
+first=first->link;
+}
+free(temp);
+}
+
+
+void deleteEnd()
+{
+lstptr temp,prev;
+if(first==NULL)
+{
+printf("\n List is empty");
+return;
+}
+temp=first;
+if(temp->link==NULL)
+{
+first=NULL;
+}
+else
+{
+prev=temp;
+while(temp->link!=NULL)
+{
+prev=temp;
+temp=temp->link;
+}
+prev->link=NULL;
+}
+free(temp);
+}
+
+
+void deleteSpecific(int ele)
+{
+ lstptr temp,prev;
+temp=first;
+if(first==NULL)
+    {
+     printf("List is empty\n");
+     return;
+    }
+else if(first->data==ele)
+{
+ if(first->link!=NULL)
+{
+ first=first->link;
+}
+ else
+ first=NULL;
+}
+else
+   {
+    while(temp->data!=ele&&temp->link!=NULL)
+      {
+        prev=temp;
+        temp=temp->link;
+       }
+    if(temp->link==NULL&&temp->data!=ele)
+       {
+        printf("Item not found");
+        return;
+       }
+     else if(temp->link!=NULL)
+       prev->link=temp->link;
+      else
+      prev->link=NULL;
+    }
+free(temp);
+}
+
+
+
 
 void display()
 {
@@ -83,6 +169,14 @@ case 1: printf("Element to be Inserted");
 case 2: printf("Element to be Inserted");
 	scanf("%d",&ele);
 	insertEnd(ele);
+	break;
+case 3: deleteBegin();
+	break;
+case 4: deleteEnd();
+	break;
+case 5: printf("Enter the key Element to be deleted");
+	scanf("%d",&ele);
+	deleteSpecific(ele);
 	break;
 case 6: display();
 	break;
